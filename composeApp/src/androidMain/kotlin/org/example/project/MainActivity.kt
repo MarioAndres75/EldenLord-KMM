@@ -9,6 +9,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import org.example.project.screens.ArmasScreen
+import org.example.project.screens.GenericDetailScreen
 import org.example.project.screens.HomeScreen
 
 class MainActivity : ComponentActivity() {
@@ -25,11 +27,18 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App1() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "home") {
+    NavHost(
+        navController = navController,
+        startDestination = "home"
+    ) {
         composable("home") { HomeScreen(navController) }
-        //  agregar otras pantallas
-        // composable("details") { DetailsScreen(navController) }
+        composable("armas") { ArmasScreen(navController) }
+        composable("detail/{name}") { backStackEntry ->
+            val name = backStackEntry.arguments?.getString("name") ?: ""
+            GenericDetailScreen(navController = navController, itemName = name)
+        }
     }
+
 }
 
 @Preview(showBackground = true)

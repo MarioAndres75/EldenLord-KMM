@@ -53,50 +53,6 @@ fun HomeScreen(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(homeItems) { item ->
-                MenuGridCard(item)
-            }
-        }
-    }
-}
-
-@Composable
-fun MenuGridCard(item: HomeItem) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { /* No hace nada por ahora */ }
-    ) {
-        Column(
-            modifier = Modifier
-                .background(Color.White)
-                .padding(4.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            // Imagen completa, que se ajuste al ancho del card
-            Image(
-                painter = painterResource(id = item.imageRes),
-                contentDescription = item.name,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp),
-                contentScale = ContentScale.Crop
-            )
-
-            // Nombre debajo de la imagen
-            Text(
-                text = item.name,
-                fontSize = 16.sp,
-                modifier = Modifier
-                    .padding(vertical = 8.dp),
-                color = Color.Black
-            )
-        }
+        MenuGrid(navController)
     }
 }

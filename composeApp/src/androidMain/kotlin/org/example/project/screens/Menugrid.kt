@@ -23,16 +23,21 @@ import org.example.project.ui.mantequita
 
 @Composable
 fun MenuGrid(navController: NavHostController) {
-    val data = getImagenesHome()
+    val data: List<HomeImage> = getImagenesHome()
+
     LazyVerticalGrid(columns = GridCells.Fixed(2), modifier = Modifier.padding(top = 10.dp)) {
-        items(data) { it ->
-            MenuGridCard(it) {
-                // Para Android: por ahora solo mostramos un Toast o Log
-                println("Botón presionado: ${it.name}")
+        items(data) { card: HomeImage ->
+            MenuGridCard(card) {
+                if (card.name.equals("Armas", ignoreCase = true)) {
+                    navController.navigate("armas")
+                } else {
+                    navController.navigate("detail/${card.name}")
+                }
             }
         }
     }
 }
+
 
 @Composable
 fun MenuGridCard(card: HomeImage, onBotonClick: () -> Unit) {
@@ -65,3 +70,4 @@ fun MenuGridCard(card: HomeImage, onBotonClick: () -> Unit) {
         }
     }
 }
+
