@@ -41,8 +41,3 @@ fun App1() {
 
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewApp() {
-    App()
-}

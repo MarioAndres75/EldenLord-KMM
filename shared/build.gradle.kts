@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.composeMultiplatform) // 🔹 Necesario para usar compose.*
+    alias(libs.plugins.composeMultiplatform)
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.20"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.20"
 }
@@ -15,7 +15,6 @@ kotlin {
         }
     }
 
-    // 🔹 Soporte completo para iOS
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -41,6 +40,7 @@ kotlin {
 
                 implementation("media.kamel:kamel-image:0.9.5")
 
+
             }
         }
 
@@ -57,7 +57,7 @@ kotlin {
             }
         }
 
-        // 🔹 iOS Main unificado
+        //  iOS Main
         val iosMain by creating {
             dependsOn(commonMain)
             dependencies {
@@ -66,7 +66,6 @@ kotlin {
             }
         }
 
-        // Vinculamos los targets específicos de iOS con iosMain
         val iosX64Main by getting { dependsOn(iosMain) }
         val iosArm64Main by getting { dependsOn(iosMain) }
         val iosSimulatorArm64Main by getting { dependsOn(iosMain) }

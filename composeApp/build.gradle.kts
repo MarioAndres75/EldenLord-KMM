@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.composeMultiplatform) // ✅ ESTE es el que activa Compose MPP
-    id("org.jetbrains.kotlin.plugin.compose") version "2.2.20" // ✅ NECESARIO para Kotlin 2.0+
+    alias(libs.plugins.composeMultiplatform)
+    id("org.jetbrains.kotlin.plugin.compose") version "2.2.20"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.20"
 }
 
