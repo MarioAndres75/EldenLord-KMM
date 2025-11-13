@@ -1,9 +1,9 @@
 package ViewModels
 
 import domain.clases.Magia
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import network.EldenRingClient
 
@@ -56,4 +56,3 @@ data class MagiasState(
     val magias: List<Magia> = emptyList(),
     val error: String? = null
 )
-

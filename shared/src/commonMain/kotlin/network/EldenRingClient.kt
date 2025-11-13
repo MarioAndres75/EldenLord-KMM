@@ -71,6 +71,7 @@ object EldenRingClient {
             emptyList()
         }
     }
+
     // --- NPC ---
     suspend fun getNpcs(): List<Npc> {
         return try {
@@ -82,8 +83,7 @@ object EldenRingClient {
         }
     }
 
-
-   // --- CENIZAS ---
+    // --- CENIZAS ---
     suspend fun getCenizas(): List<Ceniza> {
         return try {
             val response: ListaCenizas = client.get("$BASE_URL/ashes").body()
@@ -93,6 +93,7 @@ object EldenRingClient {
             emptyList()
         }
     }
+
     // --- MAGIAS ---
     suspend fun getMagias(): List<Magia> {
         return try {
@@ -114,5 +115,4 @@ object EldenRingClient {
             emptyList()
         }
     }
-
 }

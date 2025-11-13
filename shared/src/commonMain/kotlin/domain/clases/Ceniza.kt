@@ -10,4 +10,3 @@ data class Ceniza(
     val description: String? = null,
     val effect: String? = null
 )
-

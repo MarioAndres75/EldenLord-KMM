@@ -47,4 +47,3 @@ data class NpcState(
     val npcs: List<Npc> = emptyList(),
     val error: String? = null
 )
-

@@ -6,4 +6,3 @@ import kotlinx.serialization.Serializable
 data class ListaCenizas(
     val data: List<Ceniza>
 )
-

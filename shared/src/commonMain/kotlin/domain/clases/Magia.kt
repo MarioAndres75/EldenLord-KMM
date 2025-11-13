@@ -9,4 +9,3 @@ data class Magia(
     val image: String? = null,
     val description: String? = null
 )
-
