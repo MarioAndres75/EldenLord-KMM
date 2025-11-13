@@ -1,6 +1,6 @@
 package org.example.project.screens
 
-import ViewModels.ArmasViewModel
+import ViewModels.ItemsViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,17 +18,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
-import domain.clases.Arma
+import domain.clases.Item
 import org.example.project.ui.fondoCard
 import org.example.project.ui.mantequita
 
 @Composable
-fun ArmasScreen(navController: NavHostController, viewModel: ArmasViewModel = ArmasViewModel()) {
+fun ItemsScreen(navController: NavHostController, viewModel: ItemsViewModel = ItemsViewModel()) {
     val state by viewModel.state.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
 
-        // --- Barra superior idéntica a la de Jefes ---
+        // --- Barra superior idéntica a la de Armas ---
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -54,7 +54,7 @@ fun ArmasScreen(navController: NavHostController, viewModel: ArmasViewModel = Ar
 
                 // --- Título centrado ---
                 Text(
-                    text = "Armas",
+                    text = "Items",
                     fontSize = 22.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
@@ -66,7 +66,7 @@ fun ArmasScreen(navController: NavHostController, viewModel: ArmasViewModel = Ar
             }
         }
 
-        // --- Contenido principal (sin cambios) ---
+        // --- Contenido principal ---
         when {
             state.isLoading -> Box(
                 modifier = Modifier.fillMaxSize(),
@@ -88,8 +88,8 @@ fun ArmasScreen(navController: NavHostController, viewModel: ArmasViewModel = Ar
                     .padding(8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(state.armas) { arma ->
-                    ArmaItem(arma)
+                items(state.items) { item ->
+                    ItemCard(item)
                 }
             }
         }
@@ -97,18 +97,18 @@ fun ArmasScreen(navController: NavHostController, viewModel: ArmasViewModel = Ar
 }
 
 @Composable
-fun ArmaItem(arma: Arma) {
+fun ItemCard(item: Item) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Row(modifier = Modifier.padding(8.dp)) {
             Image(
-                painter = rememberAsyncImagePainter(arma.image ?: ""),
-                contentDescription = arma.name,
+                painter = rememberAsyncImagePainter(item.image ?: ""),
+                contentDescription = item.name,
                 modifier = Modifier.size(64.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Column {
-                Text(arma.name, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(arma.description ?: "Sin descripción", fontSize = 14.sp)
+                Text(item.name, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(item.description ?: "Sin descripción", fontSize = 14.sp)
             }
         }
     }

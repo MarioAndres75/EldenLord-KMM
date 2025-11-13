@@ -1,7 +1,11 @@
 package network
 
 import domain.clases.Arma
+import domain.clases.Item
+import domain.clases.Jefe
 import domain.clases.ListaArmas
+import domain.clases.ListaItems
+import domain.clases.ListaJefes
 
 
 import io.ktor.client.*
@@ -42,8 +46,8 @@ object EldenRingClient {
         }
     }
 
-    // --- JEFES ---
-    /*suspend fun getBosses(): List<Jefe> {
+    //--- JEFES ---
+    suspend fun getBosses(): List<Jefe> {
         return try {
             val response: ListaJefes = client.get("$BASE_URL/bosses").body()
             response.data
@@ -53,7 +57,7 @@ object EldenRingClient {
         }
     }
 
-    // --- ITEMS ---
+    //--- ITEMS ---
     suspend fun getItems(): List<Item> {
         return try {
             val response: ListaItems = client.get("$BASE_URL/items").body()
@@ -64,7 +68,7 @@ object EldenRingClient {
         }
     }
 
-    // --- NPCs ---
+    /*// --- NPCs ---
     suspend fun getNPCs(): List<NPC> {
         return try {
             val response: ListaNPC = client.get("$BASE_URL/npcs").body()

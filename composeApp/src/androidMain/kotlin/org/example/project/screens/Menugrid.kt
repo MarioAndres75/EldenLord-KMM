@@ -30,7 +30,12 @@ fun MenuGrid(navController: NavHostController) {
             MenuGridCard(card) {
                 if (card.name.equals("Armas", ignoreCase = true)) {
                     navController.navigate("armas")
-                } else {
+                }  else if (card.name.equals("Jefes", ignoreCase = true)) {
+                    navController.navigate("jefes")
+                } else if (card.name.equals("Items", ignoreCase = true)) {
+                    navController.navigate("items")
+                }
+                else {
                     navController.navigate("detail/${card.name}")
                 }
             }
