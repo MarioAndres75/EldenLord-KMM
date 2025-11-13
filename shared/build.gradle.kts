@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.20"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.20"
+    id("org.jlleitschuh.gradle.ktlint") version "11.6.0"
 }
 
 kotlin {
@@ -39,8 +40,6 @@ kotlin {
                 // ✅ Kamel (para imágenes multiplataforma)
 
                 implementation("media.kamel:kamel-image:0.9.5")
-
-
             }
         }
 

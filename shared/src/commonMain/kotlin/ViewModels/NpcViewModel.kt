@@ -1,31 +1,31 @@
 package ViewModels
 
-import domain.clases.Item
+import domain.clases.Npc
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import network.EldenRingClient
 
-class ItemsViewModel : KmmViewModel() {
+class NpcViewModel : KmmViewModel() {
 
     private val api = EldenRingClient
 
-    private val _state = MutableStateFlow(ItemsState())
-    val state: StateFlow<ItemsState> = _state
+    private val _state = MutableStateFlow(NpcState())
+    val state: StateFlow<NpcState> = _state
 
     init {
-        getItems()
+        getNpcs()
     }
 
-    fun getItems() {
+    fun getNpcs() {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true, error = null)
 
             try {
-                val items = api.getItems()
+                val npcs = api.getNpcs()
                 _state.value = _state.value.copy(
                     isLoading = false,
-                    items = items,
+                    npcs = npcs,
                     error = null
                 )
             } catch (e: Exception) {
@@ -42,8 +42,9 @@ class ItemsViewModel : KmmViewModel() {
     }
 }
 
-data class ItemsState(
+data class NpcState(
     val isLoading: Boolean = false,
-    val items: List<Item> = emptyList(),
+    val npcs: List<Npc> = emptyList(),
     val error: String? = null
 )
+

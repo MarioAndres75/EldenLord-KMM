@@ -1,9 +1,5 @@
 package domain.clases
 
-
-
-
-
 import kotlinx.serialization.Serializable
 
 @Serializable

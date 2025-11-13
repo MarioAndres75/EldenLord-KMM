@@ -1,31 +1,40 @@
 package ViewModels
 
-import domain.clases.Item
+import domain.clases.Magia
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import network.EldenRingClient
 
-class ItemsViewModel : KmmViewModel() {
+class MagiasViewModel : KmmViewModel() {
 
     private val api = EldenRingClient
 
-    private val _state = MutableStateFlow(ItemsState())
-    val state: StateFlow<ItemsState> = _state
+    private val _state = MutableStateFlow(MagiasState())
+    val state: StateFlow<MagiasState> = _state
 
     init {
-        getItems()
+        getMagias()
     }
 
-    fun getItems() {
+    fun getMagias() {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true, error = null)
 
             try {
-                val items = api.getItems()
+                // Ejecutar ambas llamadas en paralelo para acelerar la carga
+                val spellsDeferred = async { api.getMagias() }
+                val incantsDeferred = async { api.getIncantations() }
+
+                val spells = spellsDeferred.await()
+                val incants = incantsDeferred.await()
+
+                val combined = (spells + incants).sortedBy { it.name.lowercase() } // opcional: ordenar por nombre
+
                 _state.value = _state.value.copy(
                     isLoading = false,
-                    items = items,
+                    magias = combined,
                     error = null
                 )
             } catch (e: Exception) {
@@ -42,8 +51,9 @@ class ItemsViewModel : KmmViewModel() {
     }
 }
 
-data class ItemsState(
+data class MagiasState(
     val isLoading: Boolean = false,
-    val items: List<Item> = emptyList(),
+    val magias: List<Magia> = emptyList(),
     val error: String? = null
 )
+

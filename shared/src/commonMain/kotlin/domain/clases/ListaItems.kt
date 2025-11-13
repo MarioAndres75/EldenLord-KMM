@@ -6,5 +6,3 @@ import kotlinx.serialization.Serializable
 data class ListaItems(
     val data: List<Item>
 )
-
-

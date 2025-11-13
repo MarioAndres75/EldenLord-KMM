@@ -1,32 +1,31 @@
 package ViewModels
 
-import domain.clases.Item
+
+import domain.clases.Ceniza
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import network.EldenRingClient
 
-class ItemsViewModel : KmmViewModel() {
+class CenizasViewModel : KmmViewModel() {
 
     private val api = EldenRingClient
 
-    private val _state = MutableStateFlow(ItemsState())
-    val state: StateFlow<ItemsState> = _state
+    private val _state = MutableStateFlow(CenizasState())
+    val state: StateFlow<CenizasState> = _state
 
     init {
-        getItems()
+        getCenizas()
     }
 
-    fun getItems() {
+    fun getCenizas() {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true, error = null)
-
             try {
-                val items = api.getItems()
+                val cenizas = api.getCenizas()
                 _state.value = _state.value.copy(
                     isLoading = false,
-                    items = items,
-                    error = null
+                    cenizas = cenizas
                 )
             } catch (e: Exception) {
                 _state.value = _state.value.copy(
@@ -36,14 +35,10 @@ class ItemsViewModel : KmmViewModel() {
             }
         }
     }
-
-    override fun onCleared() {
-        super.onCleared()
-    }
 }
 
-data class ItemsState(
+data class CenizasState(
     val isLoading: Boolean = false,
-    val items: List<Item> = emptyList(),
+    val cenizas: List<Ceniza> = emptyList(),
     val error: String? = null
 )

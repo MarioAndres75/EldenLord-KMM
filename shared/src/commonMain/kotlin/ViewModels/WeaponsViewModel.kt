@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import network.EldenRingAPI
 
-
 class WeaponsViewModel(
     private val api: EldenRingAPI = EldenRingAPI()
 ) {
@@ -24,6 +23,3 @@ class WeaponsViewModel(
         }
     }
 }
-
-
-
