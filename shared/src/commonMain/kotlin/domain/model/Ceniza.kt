@@ -1,11 +1,12 @@
-package domain.clases
+package domain.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Magia(
+data class Ceniza(
     val id: String,
     val name: String,
     val image: String? = null,
-    val description: String? = null
+    val description: String? = null,
+    val effect: String? = null,
 )

@@ -1,4 +1,4 @@
-package domain.clases
+package domain.model
 
 import kotlinx.serialization.Serializable
 
@@ -9,5 +9,5 @@ data class Item(
     val description: String? = null,
     val image: String? = null,
     val category: String? = null,
-    val type: String? = null
+    val type: String? = null,
 )
