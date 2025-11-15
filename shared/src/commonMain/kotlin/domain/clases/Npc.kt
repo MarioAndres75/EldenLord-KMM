@@ -1,4 +1,4 @@
-package domain.model
+package domain.clases
 
 import kotlinx.serialization.Serializable
 
@@ -8,5 +8,5 @@ data class Npc(
     val name: String,
     val image: String? = null,
     val quote: String? = null,
-    val location: String? = null,
+    val location: String? = null
 )

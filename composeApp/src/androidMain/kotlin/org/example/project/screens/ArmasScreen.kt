@@ -1,5 +1,6 @@
 package org.example.project.screens
 
+import ViewModels.ArmasViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,42 +18,37 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
-import domain.model.Arma
+import domain.clases.Arma
 import org.example.project.ui.fondoCard
 import org.example.project.ui.mantequita
-import presentation.viewModels.ArmasViewModel
 
 @Composable
-fun ArmasScreen(
-    navController: NavHostController,
-    viewModel: ArmasViewModel = ArmasViewModel(),
-) {
+fun ArmasScreen(navController: NavHostController, viewModel: ArmasViewModel = ArmasViewModel()) {
     val state by viewModel.state.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
+
         // --- Barra superior idéntica a la de Jefes ---
         Box(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .background(color = mantequita)
-                    .padding(top = 24.dp, bottom = 8.dp, start = 8.dp, end = 8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = mantequita)
+                .padding(top = 24.dp, bottom = 8.dp, start = 8.dp, end = 8.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth()
             ) {
                 // --- Botón Volver ---
                 Box(
-                    modifier =
-                        Modifier
-                            .clickable { navController.popBackStack() }
-                            .padding(8.dp),
+                    modifier = Modifier
+                        .clickable { navController.popBackStack() }
+                        .padding(8.dp)
                 ) {
                     Text(
                         text = "< Volver",
                         fontSize = 18.sp,
-                        color = Color.Black,
+                        color = Color.Black
                     )
                 }
 
@@ -62,45 +58,40 @@ fun ArmasScreen(
                     fontSize = 22.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
-                    modifier =
-                        Modifier
-                            .weight(1f)
-                            .padding(end = 48.dp),
-                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 48.dp),
+                    textAlign = TextAlign.Center
                 )
             }
         }
 
         // --- Contenido principal (sin cambios) ---
         when {
-            state.isLoading ->
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
+            state.isLoading -> Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
 
-            state.error != null ->
-                Text(
-                    text = "Error: ${state.error}",
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.padding(16.dp),
-                )
+            state.error != null -> Text(
+                text = "Error: ${state.error}",
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(16.dp)
+            )
 
-            else ->
-                LazyColumn(
-                    modifier =
-                        Modifier
-                            .fillMaxSize()
-                            .background(color = fondoCard)
-                            .padding(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    items(state.armas) { arma ->
-                        ArmaItem(arma)
-                    }
+            else -> LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = fondoCard)
+                    .padding(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(state.armas) { arma ->
+                    ArmaItem(arma)
                 }
+            }
         }
     }
 }
@@ -112,7 +103,7 @@ fun ArmaItem(arma: Arma) {
             Image(
                 painter = rememberAsyncImagePainter(arma.image ?: ""),
                 contentDescription = arma.name,
-                modifier = Modifier.size(64.dp),
+                modifier = Modifier.size(64.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Column {

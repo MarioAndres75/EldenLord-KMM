@@ -1,8 +1,8 @@
-package domain.model
+package domain.clases
 
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ListaArmas(
-    val data: List<Arma>,
+    val data: List<Arma>
 )

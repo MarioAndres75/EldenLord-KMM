@@ -1,4 +1,4 @@
-package domain.model
+package domain.clases
 
 import kotlinx.serialization.Serializable
 
@@ -7,10 +7,10 @@ data class Jefe(
     val id: String,
     val name: String,
     val image: String? = null,
-    val description: String? = null,
+    val description: String? = null
 )
 
 @Serializable
 data class ListaJefes(
-    val data: List<Jefe>,
+    val data: List<Jefe>
 )

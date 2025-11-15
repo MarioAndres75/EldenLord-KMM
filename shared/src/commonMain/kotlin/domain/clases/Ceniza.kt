@@ -1,4 +1,4 @@
-package domain.model
+package domain.clases
 
 import kotlinx.serialization.Serializable
 
@@ -8,5 +8,5 @@ data class Ceniza(
     val name: String,
     val image: String? = null,
     val description: String? = null,
-    val effect: String? = null,
+    val effect: String? = null
 )

@@ -1,6 +1,6 @@
-package domain.model
+package domain.clases
 
 data class HomeImage(
     val resourceId: Int,
-    val name: String,
+    val name: String
 )
